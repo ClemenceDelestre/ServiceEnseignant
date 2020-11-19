@@ -41,7 +41,8 @@ public class Enseignant extends Personne {
             totalForOneUE =totalForOneUE + sp.getVolumeCM()*1.5 + sp.getVolumeTD() + sp.getVolumeTP()*0.75 ; 
         }}
         return (int) Math.round (totalForOneUE) ;
-         }
+          
+    }
                 
 
 
@@ -61,6 +62,11 @@ public class Enseignant extends Personne {
     public int heuresPlanifiées() {
         // TODO: Implémenter cette méthode
         throw new UnsupportedOperationException("Pas encore implémenté");
+        /* NE FONCTIONNE PAS... 
+        for (Intervention inter : myInterventions) {
+            total += inter.getDuree();
+        }
+         return int total ; */
     }
     
     public boolean enSousService() {
