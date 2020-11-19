@@ -36,5 +36,27 @@ public class ChampollionJUnitTest {
                          "L'enseignant doit maintenant avoir 30 heures prévues pour l'UE 'uml'");		
 		
 	}
-	
+	@Test
+        public void testHeuresPrevuesPourUE() { 
+            untel.ajouteEnseignement(uml, 0, 10, 0);
+            untel.ajouteEnseignement(java,0,15,0);
+            assertEquals (10, untel.heuresPrevuesPourUE(uml), "L'enseignant doit avoir 10h prevues pour l'uml") ; 
+            assertEquals (15, untel.heuresPrevuesPourUE(java), "L'enseignant doit avoir 15h prevues pour java") ; 
+            
+        }
+        
+        
+        
+        @Test
+        public void TestEnSousServiceTrue () {
+            //l'enseignant untel est nouveau donc en sous service
+            assertTrue(untel.enSousService()) ; 
+        }
+        
+        @Test
+        public void TestEnSousServiceFalse () {
+            untel.ajouteEnseignement(java, 0, 200, 0);
+            assertFalse (untel.enSousService()) ; 
+           
+        }
 }

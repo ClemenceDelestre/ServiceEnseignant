@@ -1,8 +1,8 @@
 package champollion;
-
+import java.util.* ;
 public class Enseignant extends Personne {
-
-    // TODO : rajouter les autres méthodes présentes dans le diagramme UML
+    private final List<ServicePrevu> servicesPrevu =new LinkedList<>() ;
+    private Set<Intervention> myInterventions = new HashSet <> () ;    //hash set = liste sans doublons
 
     public Enseignant(String nom, String email) {
         super(nom, email);
@@ -17,8 +17,12 @@ public class Enseignant extends Personne {
      *
      */
     public int heuresPrevues() {
-        // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
+        double total = 0 ; 
+        for (ServicePrevu sp : servicesPrevu) {
+            total=total + sp.getVolumeCM()*1.5 + sp.getVolumeTD() + sp.getVolumeTP()*0.75 ; 
+        }
+        
+            return (int) Math.round (total) ; 
     }
 
     /**
@@ -31,9 +35,15 @@ public class Enseignant extends Personne {
      *
      */
     public int heuresPrevuesPourUE(UE ue) {
-        // TODO: Implémenter cette méthode
-        throw new UnsupportedOperationException("Pas encore implémenté");
-    }
+        double totalForOneUE = 0 ;
+        for (ServicePrevu sp : servicesPrevu) { 
+            if (ue.equals(sp.getUe())) {
+            totalForOneUE =totalForOneUE + sp.getVolumeCM()*1.5 + sp.getVolumeTD() + sp.getVolumeTP()*0.75 ; 
+        }}
+        return (int) Math.round (totalForOneUE) ;
+         }
+                
+
 
     /**
      * Ajoute un enseignement au service prévu pour cet enseignant
@@ -44,8 +54,26 @@ public class Enseignant extends Personne {
      * @param volumeTP le volume d'heures de TP
      */
     public void ajouteEnseignement(UE ue, int volumeCM, int volumeTD, int volumeTP) {
+        ServicePrevu nouveauService = new ServicePrevu ( volumeCM, volumeTD, volumeTP, this, ue  ) ;
+        servicesPrevu.add(nouveauService);
+    }
+
+    public int heuresPlanifiées() {
         // TODO: Implémenter cette méthode
         throw new UnsupportedOperationException("Pas encore implémenté");
     }
-
+    
+    public boolean enSousService() {
+        if (heuresPrevues() < 192) { 
+            return true ; 
+        }
+        else {
+            return false;
+        }
+    }
+    
+    public void ajouterIntervention(Intervention e ) {
+        myInterventions.add(e);
+        
+    }
 }
